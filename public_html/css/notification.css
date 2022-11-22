@@ -1,0 +1,127 @@
+.unread {
+  color: #000000!important;
+/*   background-color: rgb(251,223,178); */
+  background-color: #FEF7EA;
+}
+
+
+.read {
+  color: #65676B!important;
+  background-color: #ffffff;
+}
+
+
+
+
+.toast_notif {
+  position: fixed;
+  top: -10px;
+  right: 13px;
+  min-width: 300px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* background-color: aqua; */
+  pointer-events: none;
+  z-index: 1000000000000!important;
+}
+
+.toast_notif .toast_notif_dialog {
+  position: relative;
+  padding: 18px 50px 15px 60px;
+  background: gainsboro;
+  color: #212529;
+  font-family: "Raleway";
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin: 5px 0px;
+  opacity: 0;
+  left: 20px;
+  animation: show_toast_notif_dialog 500ms ease-in-out forwards;
+  pointer-events: fill !important;
+  word-wrap: break-word;
+
+}
+
+
+
+
+
+.success {
+  border: 2px solid #CAEAD3;
+  background-color: #EBF7EE !important;
+
+}
+
+.success::after {
+  content: url('data:image/svg+xml; utf8, <svg height="29" width="29" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path style="fill: white" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>');
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 45px;
+  height: 45px;
+  background-color: #3EBE61;
+  padding: 7px 0px 0px 8px;
+  border-radius: 15px;
+}
+
+.error::after {
+  content: url('data:image/svg+xml; utf8, <svg height="29" width="29" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  style="fill: white" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z"/></svg>');
+
+
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 45px;
+  height: 45px;
+  background-color: #ED4F2B;
+  padding: 7px 0px 0px 8px;
+  border-radius: 15px;
+}
+
+
+.error {
+  border: 2px solid #F5C5BB;
+  background-color: #FCEDEA !important;
+}
+
+.neutral::after {
+  content: url('data:image/svg+xml; utf8, <svg height="29" width="29" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path  style="fill: white" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/></svg>');
+
+
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 45px;
+  height: 45px;
+  background-color: #006CE3;
+  padding: 7px 0px 0px 8px;
+  border-radius: 15px;
+}
+
+
+.neutral {
+  border: 2px solid #ABCDF1;
+  background-color: #E5EFFA !important;
+}
+
+
+
+.toast_notif_close {
+
+  color: #212529;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0%, -50%);
+  font-weight: 900;
+}
+
+@keyframes show_toast_notif_dialog {
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}

@@ -1,5 +1,7 @@
 <?php
-/* Connection */
+session_start();
+
+/* Database Connection */
 class DbConnection {  
  public $dbHost = "localhost";
  public $dbUser = "root";

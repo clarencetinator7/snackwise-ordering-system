@@ -1,3 +1,12 @@
+<?php
+require_once dirname(__FILE__) . '/../php/classes/DbConnection.php';
+if (isset($_GET["staff"]) == 1) {
+    $_SESSION['user_type'] = 'staff';
+} else {
+    $_SESSION['user_type'] = "customer";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +15,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | Snackwise</title>
+
+    <!-- PAGE ICON -->
+    <link rel="icon" href="../img/penguin.png" type="image/icon type">
+
 
     <!-- FONT LINKS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,197 +32,125 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
     <link rel="stylesheet" href="../css/register.css">
 
+    <style>
+
+    </style>
 </head>
 
-<body>
+<div class="parent-container">
 
-    <!-- 
-Pwede mo tanggalin yung mga tabel na tags.
- -->
-    <div class="parent-container">
+    <div class="container p-5 form-container">
+        <a href="../index.php" class="snackwise-label text-decoration-none">
+            <div class="brand-icon">
+                <img src="../img/penguin.png" class="snackwise-icon" alt="Snackwise Logo">
+            </div>
+            <div class="brand-name">
+                <span class="red">SNACK<span class="yellow">WISE</span></span>
+            </div>
+        </a>
+        <form id="account_form" method="POST">
 
-        <div class="container bg-light p-5 form-container">
-            <div class="snackwise-label">
-                <div class="brand-icon">
-                    <img src="../img/penguin.png" class="snackwise-icon" alt="Snackwise Logo">
-                </div>
-                <div class="brand-name">
-                    <span class="red">SNACK<span class="yellow">WISE</span></span>
+            <div class="row">
+                <div class="col form-header">
+                    <h3>Sign Up</h3>
                 </div>
             </div>
-            <form id="account_form" method="POST">
-
+            <div class="">
+                <span id="success_message"></span>
+                <span id="error_message"></span>
+            </div>
+            <section class="personal-information-sec input section">
                 <div class="row">
-                    <div class="col form-header">
-                        <h3>Sign Up</h3>
+                    <span>Personal Information</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-12 form-group">
+                        <!-- <label for="firstname">First Name</label> -->
+                        <input type="text" class="form-control m-2" name="firstname" id="firstname" placeholder="First Name" value="" autocomplete="off">
+                        <span class="input_error" id="firstname_error"></span>
+                    </div>
+                    <div class="col-md-6 col-12 form-group">
+                        <!-- <label for="lastname">Last Name </label> -->
+                        <input type="text" class="form-control m-2" name="lastname" id="lastname" placeholder="Last Name" value="" autocomplete="off">
+                        <span class="input_error" id="lastname_error"></span>
+
                     </div>
                 </div>
-                <div class="">
-                    <span id="success_message"></span>
-                    <span id="error_message"></span>
-                </div>
-                <section class="personal-information-sec input section">
-                    <div class="row">
-                        <span>Personal Information</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-12 form-group">
-                            <!-- <label for="firstname">First Name</label> -->
-                            <input type="text" class="form-control m-2" name="firstname" id="firstname" placeholder="First Name" value="" autocomplete="off">
-                            <span class="" id="firstname_error"></span>
-                        </div>
-                        <div class="col-md-6 col-12 form-group">
-                            <!-- <label for="lastname">Last Name </label> -->
-                            <input type="text" class="form-control m-2" name="lastname" id="lastname" placeholder="Last Name" value="" autocomplete="off">
-                            <span class="" id="lastname_error"></span>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <!-- <label for="contact">Contact Number</label> -->
-                            <input type="text" class="form-control m-2" name="contact" id="contact" placeholder="Contact Number" value="" autocomplete="off">
-                            <span class="" id="contact_error"></span>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="address-information-sec input-section">
-                    <div class="row">
-                        <span>Address Information</span>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <!-- <label for="street" for="">Street</label> -->
-                            <input type="text" class="form-control m-2" name="street" id="street" placeholder="House Number / Street / Building No.">
-                            <span class="" id="street_error"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 col-6">
-                            <!-- <label for="">Region</label> -->
-                            <select name="region" class="form-select form-select-md m-2" id="region">
-                                <option class="address_option" value="none">Region</option>
-                            </select>
-                            <span class="" id="region_error"></span>
-
-                        </div>
-                        <div class="col-md-7 col-6">
-                            <!-- <label for="">Province</label> -->
-                            <select name="province" class="form-select form-select-md m-2" id="province">
-                                <option class="address_option" value="none">Province</option>
-                            </select>
-                            <span class="" id="province_error"></span>
-                        </div>
-                        <div class="col-md-12 col-6">
-                            <!-- <label for="">Municipality</label> -->
-                            <select name="municipality" class="form-select form-select-md m-2" id="municipality">
-                                <option class="address_option" value="none">Munincipality</option>
-                            </select>
-                            <span class="" id="municipality_error"></span>
-
-                        </div>
-                        <div class="col-md-12 col-6">
-
-                            <!-- <label for="">Barangay</label> -->
-                            <select name="barangay" class="form-select form-select-md m-2" id="barangay">
-                                <option class="address_option" value="none">Barangay</option>
-                            </select>
-                            <span class="" id="barangay_error"></span>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="account-information-sec input-section">
-                    <div class="row">
-                        <span>Account Information</span>
-                    </div>
-
-                    <div class="row">
-                        <div class="col form-group">
-                            <!-- <label for="username">Username</label> -->
-                            <input type="text" class="form-control m-2" name="username" id="username" placeholder="Username " value="" autocomplete="off">
-                            <span class="" id="username_error"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col form-group">
-                            <!-- <label for="email">Email Address</label> -->
-                            <input type="text" class="form-control m-2" name="email" id="email" placeholder="Email Address" value="" autocomplete="off">
-                            <span class="" id="email_error"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 form-group">
-                            <!-- <label for="password">Password</label> -->
-                            <input type="password" class="form-control m-2" name="password" id="password" placeholder="Password" value="" onkeyup="new Account().verify_password(this.value);" autocomplete="off">
-                        </div>
-                        <div class="col-12 form-group">
-                            <!-- <label for="retype_password">Retype Password</label> -->
-                            <input type="password" class="form-control m-2" name="retype_password" id="retype_password" placeholder="Retype Password" value="" autocomplete="off">
-                        </div>
-                        <div class="password_requirements">
-                            <h6><span class="length " id="length">&#x2716;</span>Length</h6>
-                            <h6><span class="case " id="case">&#x2716;</span>Uppercase</h6>
-                            <h6><span class="number " id="number">&#x2716;</span>number</h6>
-                            <h6><span class="special " id="special">&#x2716;</span>special</h6>
-                        </div>
-                    </div>
-                </section>
                 <div class="row">
                     <div class="col">
-                        <p class="text-end">Already have an account? <a href="../account/login.php">Sign In</a></p>
+                        <!-- <label for="contact">Contact Number</label> -->
+                        <input type="text" class="form-control m-2" name="contact" id="contact" placeholder="Contact Number (09XXXXXXXXX)" value="" autocomplete="off">
+                        <span class="input_error" id="contact_error"></span>
                     </div>
                 </div>
-                <div class="form-end-btn">
-                    <div class="">
-                        <a href="index.html" id="cancel">Cancel</a>
-                    </div>
-                    <div class="">
-                        <button type="button" id="register" class="btn btn-primary"> Register</button>
-                    </div>
+            </section>
 
+            <section class="account-information-sec input-section">
+                <div class="row">
+                    <span>Account Information</span>
                 </div>
-            </form>
 
-        </div>
+                <div class="row">
+                    <div class="col form-group">
+                        <!-- <label for="username">Username</label> -->
+                        <input type="text" class="form-control m-2" name="username" id="username" placeholder="Username " value="" autocomplete="off">
+                        <span class="input_error" id="username_error"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col form-group">
+                        <!-- <label for="email">Email Address</label> -->
+                        <input type="text" class="form-control m-2" name="email" id="email" placeholder="Email Address" value="" autocomplete="off">
+                        <span class="input_error" id="email_error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 form-group password-container">
+                        <!-- <label for="password">Password</label> -->
+                        <input type="password" class="form-control m-2" name="password" id="password" placeholder="Password" value="" onkeyup="new Account().verify_password(this.value);" autocomplete="off">
+                        <i class="fa-solid fa-eye-slash toggler" id="password_toggler" for="password" onclick="new Account().toggle_password(this.id, this.getAttribute('for'))"></i>
+                        <span class="input_error" id="password_error"></span>
+                    </div>
+                    <div class="col-12 form-group password-container">
+                        <!-- <label for="retype_password">Retype Password</label> -->
+                        <input type="password" class="form-control m-2" name="retype_password" id="retype_password" placeholder="Retype Password" value="" autocomplete="off">
+                        <i class="fa-solid fa-eye-slash toggler" id="retype_password_toggler" for="retype_password" onclick="new Account().toggle_password(this.id, this.getAttribute('for'))"></i>
+                        <span class="input_error" id="retype_password_error"></span>
+                    </div>
+            </section>
+
+            <div class="row">
+                <div class="col">
+                    <p class="text-end">Already have an account? <a href="../account/login.php">Sign In</a></p>
+                </div>
+            </div>
+            <div class="form-end-btn">
+                <div class="">
+                    <a href="../index.php" id="cancel">Cancel</a>
+                </div>
+                <div class="">
+                    <button type="button" id="register" class="btn btn-primary" onclick="new Account().register();"> Register</button>
+                </div>
+
+            </div>
+        </form>
 
     </div>
 
-
-    <!-- BOOTSTRAP JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-
-    <script src="../js/Account.js"></script>
-    <script src="../js/Address.js"></script>
-    <script>
-        // Test
-
-        /* 
-            Hide the Password Requirements
-            Show only while typing password.
-        */
-
-        const passwordReq = document.querySelector(".password_requirements");
-
-        passwordReq.style.display = 'none';
-
-        // -- End of Test
-        document.addEventListener("DOMContentLoaded", function(event) {
-            let account = new Account();
-
-            document.getElementById("register").onclick = function() {
-
-                account.register();
-            }
+</div>
 
 
-            new Address().addressSelector("region", "province", "municipality", "barangay");
-
-        });
-    </script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script src="../js/Account.js"></script>
+
+<script>
+  
+
+</script>
+
 
 </html>

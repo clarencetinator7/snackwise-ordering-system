@@ -1,5 +1,5 @@
 <?php
-session_start();
+/* session_start(); */
 
 require_once dirname(__FILE__) . "/DbConnection.php";
 

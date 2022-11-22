@@ -1,0 +1,466 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+/* NAVBAR CSS */
+
+nav {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.red {
+    color: #DD1C1A;
+}
+
+.yellow {
+    color: #F0C808;
+}
+
+#active {
+    color: #F0C808;
+}
+
+
+.nav-list li{
+    margin: 0 1em;
+    font-size: 1.6em;
+}
+
+
+
+a[name="sign-up-btn"] {
+    padding: .5em 2em;
+    background-color: #DD1C1A; 
+    border: none;
+    border-radius: 10px;
+}
+
+a[name="log-in-btn"] {
+    color: #DD1C1A;
+    padding: .5em 2em;
+}
+
+/* USER DROPDOWN */
+
+.dropdown button {
+    background-color: transparent;
+    color: #878787;
+    border: none;
+    font-size: 2em;
+    transition: ease-in-out .5s;
+}
+
+.user-dropdown-container {
+    position: relative;
+}
+
+.user-dropdown-container .user-button {
+    background-color: transparent;
+    color: #878787;
+    border: none;
+    font-size: 2.3em;
+}
+
+.user-dropdown-container .drop-menu {
+    display: none;
+    position: absolute;
+    font-size: 2em;
+    background-color: white;
+    border: #d3d3d3 solid 1px;
+    border-radius: 5px;
+    width: 8em;
+    list-style: none;
+    padding: 1em .5em;
+    z-index: 10;
+}
+
+.drop-menu li {
+    margin: .3em 0;
+}
+
+.drop-menu li a {
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    color: #878787;
+    transform: .5s;
+}
+
+.drop-menu li a:hover {
+    color: #383838;
+}
+
+@media (min-width: 768px) {
+   
+    .user-dropdown-container .drop-menu {
+        /* CENTER */
+        top: 2.5em;
+        left: 50%;
+        transform: translateX(-50%);
+    }    
+    
+}
+
+/* END OF USER DROPDOWN CSS */
+
+/* End of NAVBAR CSS */
+
+.top-header {
+    background-image: url(../img/Background-Pattern.jpg);
+    height: 181px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-header .container h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 4.0em;
+}
+
+nav {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.red {
+    color: #DD1C1A;
+}
+
+.yellow {
+    color: #F0C808;
+}
+
+#active {
+    color: #F0C808;
+}
+
+
+.nav-list li{
+    margin: 0 1em;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+
+
+a[name="sign-up-btn"] {
+    padding: .5em 2em;
+    background-color: transparent; 
+    border: none;
+    color: #DD1C1A;
+    font-weight: bold;
+    border: solid 2px #DD1C1A;
+    border-radius: 10px;
+    transition: .3s ease-in-out;
+}
+
+a[name="sign-up-btn"]:hover {
+    background-color: #DD1C1A;
+    color: white;
+    border-color: #DD1C1A;
+}
+
+a[name="log-in-btn"] {
+    color: #DD1C1A;
+    font-weight: bold;
+    padding: .5em 2em;
+}
+
+/* End of NAVBAR CSS */
+
+.information {
+    text-align: center;
+    margin-top: 2em;
+    padding: 2em;
+}
+
+.information .icon {
+    color: #F0C808;
+}
+
+.information .information-title {
+    margin: .5em 0;
+    font-size: 2.5em;
+    display: block;
+    font-weight: bold;
+}
+
+.information .info {
+    font-size: 1.6em;
+}
+
+.info span {
+    display: block;
+    
+}
+
+.top-header {
+    background-image: url(../img/Background-Pattern.jpg);
+    height: 181px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-header .container h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 4.0em;
+}
+
+.contact-section {
+    margin: 5em 0;
+}
+
+.contact-section .container {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px #eeeeee;
+    border-radius: 20px;
+    padding: 0;
+}
+
+.contact-image-container {
+    display: none;
+}
+
+.contact-form-container {
+    padding: 1em;
+}
+
+.contact-form-container .contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form .form-title {
+    font-size: 2.7em;
+    font-weight: bold;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: .5em;
+}
+
+.contact-form input[type="text"], .contact-form input[type="Email"] {
+    font-size: 1.6em;
+    background-color: #eeeeee;
+    border: none;
+    margin: .5em 0;
+    padding: 1em 1.5em;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.contact-form textarea {
+    font-size: 1.6em;
+    border-radius: 10px;
+    resize: none;
+    border: none;
+    background-color: #eeeeee;
+    margin: .5em 0;
+    padding: 1em 1.5em;
+}
+
+.contact-form button {
+    background-color: #F0C808;
+    border-style: none;
+    font-size: 1.6em;
+    font-weight: bold;
+    padding: 1em 0;
+    border-radius: 10px;
+    margin-top: 1em;
+}
+
+
+.how-to-container {
+    width: 100%;
+    background-color: #FFF0CF;
+    padding: 3em 0;
+    margin-bottom: 10em;
+}
+
+.how-to-header h2{
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 1.5em;
+}
+
+
+.instruction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.instruction-caption span {
+    display: block;
+    text-align: center;
+}
+
+.instruction-caption .instruction-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.0em;
+}
+
+.instruction-caption .instruction-details {
+    font-size: 1.6em;
+}
+
+/* FOOTER CSS */
+
+.footer-header {
+    width: 100%;
+}
+
+.footer-header img {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5em;
+    
+}
+
+.footer-details .col-12 {
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+}
+
+.detail-title, .details {
+    display: block;
+    text-align: center;
+}
+
+.detail-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.0em;
+    margin-bottom: .5em;
+
+}
+
+.details {
+    font-size: 1.6em;
+}
+
+.input-container {
+    margin: 1.5em auto;
+    background-color: #EEEEEE;
+    padding: .5em;
+    border-radius: 10px;
+}
+
+.input-container form #newsletter_email {
+    border: none;
+    background-color: #EEEEEE;
+    font-size: 1.4em;
+
+}
+
+.input-container form button {
+    font-size: 1.4em;
+    background-color: #F0C808;
+    border-style: none;
+    padding: .5em 1em;
+    border-radius: 10px;
+    
+}
+
+.input-container form button:hover {
+    color: white;
+}
+
+.lower-footer {
+    height: 89px;
+    background-color: #383838;
+    color: white;
+    font-size: 1.4em;
+}
+
+.lower-footer .container {
+    height: 100%;
+}
+
+.lower-footer .container .row {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.lower-footer .container .row .col-6 .right {
+    float: right;
+}
+
+.soc-med {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.social-media-icon {
+    margin-left: .5em;
+    font-size: 1.8em;
+    color: white;
+}
+
+/* FOOTER CSS END */
+
+
+@media (min-width: 991px) {  
+
+    .contact-section .container {
+        display: flex;    
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .contact-image-container {
+        display: block;
+        overflow: hidden;
+        max-height: 100%;
+        width: 100%;
+    }
+   
+    .contact-form {
+        padding: 0 3em;
+        width: 100%;
+    }
+    
+    .contact-form .form-title {
+        margin-bottom: 1em;
+    }
+}
+
+@media (min-width: 768px) {
+    
+    .instruction {
+        margin: 0;
+    }
+
+    .information {
+        text-align: start;
+    }
+    
+}
+
+
+

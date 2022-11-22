@@ -98,8 +98,9 @@ var JSTableDefaultConfig = {
             message: "dt-message"
         },
         labels: {
-            placeholder: "Search...",
-            perPage: "{select} entries per page",
+            placeholder: "Search",
+            perPage: "{select} ",
+            /* perPage: "{select} entries per page", */
             noRows: "No entries found",
             info: "Showing {start} to {end} of {rows} entries",
             loading: "Loading...",
@@ -181,7 +182,7 @@ var JSTableDefaultConfig = {
                 var e = this.wrapper.querySelector(" ." + this.config.classes.info),
                     t = this.isSearching ? this.config.labels.infoFiltered : this.config.labels.info;
                 if (e && t.length) {
-                    var a = t.replace("{start}", this.getDataCount() > 0 ? this._getPageStartIndex() + 1 : 0).replace("{end}", this._getPageEndIndex() + 1).replace("{page}", this.currentPage).replace("{pages}", this.pager.getPages()).replace("{rows}", this.updateDataCountTotal()).replace("{rowsTotal}", this.updateDataCountTotal());
+                    var a = t.replace("{start}", this.getDataCount() > 0 ? this._getPageStartIndex() + 1 : 0).replace("{end}", this.updateDataCountTotal()).replace("{page}", this.currentPage).replace("{pages}", this.pager.getPages()).replace("{rows}", this.updateDataCountTotal()).replace("{rowsTotal}", this.updateDataCountTotal());
                     e.innerHTML = a
                 }
             }
@@ -304,7 +305,7 @@ var JSTableDefaultConfig = {
               /*   console.log("d"); */
                 if (this.config.serverSide) return this._fetchData();
                 var e = this._getPageStartIndex(),
-                    t = this._getPageEndIndex();
+                    t = this.updateDataCountTotal();
                 return Promise.resolve(this._getData()).then((function (a) {
                     return a.filter((function (a, s) {
                         return s >= e && s <= t

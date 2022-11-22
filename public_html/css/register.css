@@ -1,5 +1,19 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background-image: url(../img/Background-Pattern.jpg);
+}
+
+.parent-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .address_option {
@@ -43,7 +57,12 @@ body {
     font-size: 36px;
     color: #DD1C1A;
 }
-
+.input-group-text {
+    border-radius:  0 5px 5px 0 !important;
+  border: none;
+  background-color: #eeeeee;
+    padding: 1.53em 1.3em;
+}
 .input-section {
     margin: 2em 0;
 }
@@ -54,6 +73,20 @@ body {
     height: 65px;
     margin: 1em 0;
     padding: 1em;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container .toggler {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: #75758A;
+    font-size: 1.2em;
+    cursor: pointer;
+    z-index: 2;
 }
 
 .form-select {
@@ -93,4 +126,18 @@ body {
         width: 35em;
     }
 
+}
+
+/* hides ms-edge password toggler */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+.input_error {
+    left:10px;
+    position: relative;
+    top: -8px;
+    font-size: 14px;
+    color: red;
 }
