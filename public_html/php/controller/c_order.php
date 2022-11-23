@@ -9,13 +9,21 @@ $validate = new Validate();
 
 /* order.php */
 if (isset($_POST["display_order"])) {
+    $category = $_POST['category'];
     $user_id = $_SESSION['user_id'];
-    $order->display_order($user_id);
+    $order->display_order($user_id,$category);
+}
+if (isset($_POST["display_details"])) {
+    $display_details = $_POST['display_details'];
+    $order_id = $_POST['order_id'];
+    $order->display_order($order_id, "details");
 }
 if (isset($_POST["display_completed_order"])) {
     $user_id = $_SESSION['user_id'];
-    $order->display_completed_order($user_id);
+    $category = $_POST['category'];
+    $order->display_order($user_id,$category);
 }
+
 if (isset($_POST["delete_order"])) {
     $order_id = $_POST['order_id'];
     $order->delete_order($order_id);
@@ -30,7 +38,7 @@ if (isset($_POST["add_order"]) == 'add_order') {
     $order->add_order($user_id, $cartlist, $date, $time);
 }
 
-if (isset($_POST["qr_claim_order"]) == 'qr_claim_order') {
+if (isset($_POST["claim_order"]) == 'claim_order') {
     $identifier = $_POST['identifier'];
     $type = $_POST['type'];
 
@@ -59,7 +67,7 @@ $type = $_POST['type'];
 
 
 
-
+/* -------------------- ADMIN -------------------- */
 /* --------------------admin */
 if (isset($_POST["action_order"])) {
 
@@ -91,7 +99,7 @@ if (isset($_POST["action_order"])) {
         
         $order_id = $_POST['order_id'];
         $user_id = $_POST['user_id'];
-        $validate->validateLength($del_notif,'','del_notif_error', 'Required' );
+        $validate->validate_length($del_notif,'','del_notif_error', 'Required' );
        
 
 

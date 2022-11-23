@@ -7,7 +7,6 @@ require_once dirname(__FILE__) . '/php/classes/Validate.php';
 $validate = new Validate();
 
 $account = new Account();
-
 /* deletes expired verification code */
 $account->delete_code();
 
@@ -52,58 +51,9 @@ $account->delete_code();
 
  <!-- toast_notif notification will be appended here -->
  <div class="toast_notif" id="toast_notif"></div>
-    <!-- SIDEBAR -->
-
-    <div class="sidecart  flex-column h-100 top-0  " id="sidecart">
-
-        <div class="mx-3 mt-3">
-            <p class="cart-label bold mb-0"> SHOPPING CART <i class=" sidecart-close fa-solid fa-xmark float-end" onclick="close_cart();"></i></p>
-            <hr class="w-100 my-2">
-        </div>
-
-        <div class="cart_list flex-grow-1 mx-3">
-
-
-            <div class="cart_item d-flex align-items-center my-3 mx-1 p-1 ">
-                <i class="item-remove fa-solid fa-xmark"></i>
-                <img class=" cart-image mx-2 " src="img/menu-imgs/A.jpg" alt="">
-                <div class="d-flex flex-column">
-                    <div class="item-name">Combo A</div>
-                    <div class=""><span class="item-quantity">1x</span><span class="ms-3 bolder item-price">75.00 ₱</span></div>
-                </div>
-            </div>
-
-
-            <div class="cart_item d-flex align-items-center my-3 mx-1 p-1 ">
-                <i class="item-remove fa-solid fa-xmark"></i>
-                <img class=" cart-image mx-2 " src="img/menu-imgs/B.jpg" alt="Combo B">
-                <div class="d-flex flex-column">
-                    <div class="item-name">Combo B</div>
-                    <div class=""><span class="item-quantity">1x</span><span class="ms-3 bolder item-price">89.00 ₱</span></div>
-                </div>
-            </div>
-
-
-
-
-
-        </div>
-
-        <div class="cart_price_information d-flex flex-column mx-3 mb-3">
-            <hr class="w-100 my-2">
-            <div class=" bold">SUBTOTAL:</div>
-            <div class="text-end bolder">164.00 ₱</div>
-
-            <button type="button" class="btn btn-checkout w-100 my-2">CHECKOUT</button>
-            <div type="button" class="btn btn-clear w-100">Clear Cart</div>
-        </div>
-    </div>
-
-    <!-- SIDEBAR -->
 
     <div class="parent-container">
         <!-- <div class="top-wrapper"> -->
-
         <nav class="navbar navbar-light bg-light navbar-expand-md">
             <div class="container">
                 <a href="index.php" class="navbar-brand">
@@ -185,31 +135,9 @@ $account->delete_code();
             <div class="products-container container">
 
                 <!-- bestseller items will be appended here -->
-                <div class="bestseller_list row justify-content-start" id="bestseller_list">
-
-                    <!-- <div class="col-12 col-md-3 product">
-                        <div class="product-img-container">
-                            <img src="img/menu-imgs/B.jpg" alt="combo a image" class="product-img">
-                        </div>
-                        <div class="product-details-container">
-                            <div class="product-caption">
-                                <span class="product-name">Combo B</span>
-                                <span class="product-description">Includes: Regular Burger, Carbonara, Blue Lemonade</span>
-                            </div>
-                            <div class="cart-container">
-                                <span class="product-price">PHP 89.00</span>
-                                <span class="add-to-cart-container">
-                                    <button class="add-to-cart-btn" type="submit" onclick="open_cart();">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-                </div>
-        </section>
+                <div class="bestseller_list row justify-content-start" id="bestseller_list"></div>
+        
+            </section>
 
         <section class="how-to-container">
             <div class="container">
@@ -360,20 +288,9 @@ $account->delete_code();
     <script src="js/Notification.js"></script>
     
     <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
-            let menu = new Menu();
-            menu.display_bestseller();
-        });
 
-        function open_cart() {
-            document.getElementById('sidecart').style.display = "flex";
-            document.getElementById('sidecart').style.animationName = "open_cart";
-
-        }
-
-        function close_cart() {
-            document.getElementById('sidecart').style.animationName = "close_cart";
-        }
+new Menu().display_bestseller();
+   
 
         /* DROPDOWN */
 

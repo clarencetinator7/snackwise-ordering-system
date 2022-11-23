@@ -1,12 +1,12 @@
 RewriteEngine On
-ErrorDocument 400 /Project/error.php
-ErrorDocument 403 /Project/error.php
-ErrorDocument 404 /Project/error.php
-ErrorDocument 405 /Project/error.php
-ErrorDocument 408 /Project/error.php
-ErrorDocument 500 /Project/error.php
-ErrorDocument 502 /Project/error.php
-ErrorDocument 504 /Project/error.php
+ErrorDocument 400 /public_html/error.php
+ErrorDocument 403 /public_html/error.php
+ErrorDocument 404 /public_html/error.php
+ErrorDocument 405 /public_html/error.php
+ErrorDocument 408 /public_html/error.php
+ErrorDocument 500 /public_html/error.php
+ErrorDocument 502 /public_html/error.php
+ErrorDocument 504 /public_html/error.php
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

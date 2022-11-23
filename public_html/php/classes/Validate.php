@@ -47,13 +47,13 @@ class Validate extends DbConnection
       }
       if (strpos($name, "email") !== false) {
         if ($this->is_email($input)) {
-          if ($compare_input != "email-contact") {
+          if ($compare_input != "email-contact" && $compare_input != "email-newsletter") {
             if ($this->is_taken_email($input)) {
               unset($this->output[$name]);
             } else {
               $this->output[$name] = 'Email address is taken';
             }
-          } else {
+          } else if($compare_input == "email-newsletter") {
             if ($this->is_newsletter_registered($input)) {
               unset($this->output[$name]);
             } else {
