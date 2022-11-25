@@ -1,20 +1,17 @@
 <?php
-require dirname(__FILE__) . '/../classes/Account.php';
-require dirname(__FILE__) . '/../classes/Validate.php';
+require_once dirname(__FILE__) . '/../classes/Account.php';
+require_once dirname(__FILE__) . '/../classes/Validate.php';
 $account = new Account();
 $validate = new Validate();
 
+/* -------------------- login.php */
 if (isset($_POST["login"])) {
     $user_identifier = $_POST['user_identifier'];
     $password = $_POST['password'];
-
-    
-    $validate->validateLength($password, 'login', 'password_error', 'Required field');
+    $validate->validate_length($password, 'login', 'password_error', 'Required field');
     $table_identifier =  $validate->table_identifier($user_identifier, 'user_identifier_error');
     $validate->user_identifier($table_identifier, $user_identifier, 'user_identifier_error');
-    $validate->validateLength($user_identifier, '', 'user_identifier_error', 'Required field');
-    
-
+    $validate->validate_length($user_identifier, '', 'user_identifier_error', 'Required field');
     /* checks if the validation above returns an error or not, if true it will display the error */
     if (count($validate->output) > 0) {
         echo json_encode($validate->output);
@@ -28,6 +25,7 @@ if (isset($_POST["login"])) {
     }
 }
 
+/* -------------------- register.php */
 if (isset($_POST["register"])) {
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -36,41 +34,26 @@ if (isset($_POST["register"])) {
     $contact = $_POST['contact'];
     $password = $_POST['password'];
     $retype_password = $_POST['retype_password'];
- /*    $region = $_POST['region'];
-    $province = $_POST['province'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
-    $street = $_POST['street']; */
     $user_type = $_SESSION['user_type'];
-
-    $validate->validateLength($firstname,'','firstname_error', 'Required field' );
-    $validate->validateLength($lastname,'', 'lastname_error', 'Required field' );
-    $validate->validateLength($contact,'', 'contact_error', 'Required field' );
-
-/*     $validate->validateLength($street,'', 'street_error', 'Required field' );
-    $validate->validateSelectorLength($region,'region_error', 'Required field' );
-    $validate->validateSelectorLength($province,'province_error', 'Required field' );
-    $validate->validateSelectorLength($municipality,'municipality_error', 'Required field' );
-    $validate->validateSelectorLength($barangay,'barangay_error', 'Required field'); */
-
-    $validate->validateLength($username, '', 'username_error', 'Required field' );
-    $validate->validateLength($email,'', 'email_error', 'Required field' );
-    $validate->validateLength($password, $retype_password, 'password_error', 'Required field' );
-    $validate->validateLength($password,$retype_password, 'retype_password_error', 'Required field' );
-
+    $validate->validate_length($firstname,'','firstname_error', 'Required field' );
+    $validate->validate_length($lastname,'', 'lastname_error', 'Required field' );
+    $validate->validate_length($contact,'', 'contact_error', 'Required field' );
+    $validate->validate_length($username, '', 'username_error', 'Required field' );
+    $validate->validate_length($email,'', 'email_error', 'Required field' );
+    $validate->validate_length($password, $retype_password, 'password_error', 'Required field' );
+    $validate->validate_length($password,$retype_password, 'retype_password_error', 'Required field' );
     if (count($validate->output) > 0) {
         echo json_encode($validate->output);
     } else {
-       /*  $account->register($firstname, $lastname, $username, $email, $contact, $password, $retype_password, $region, $province, $municipality, $barangay, $street, $user_type); */
-        $account->register($firstname, $lastname, $username, $email, $contact, $password, $retype_password, $user_type);
+         $account->register($firstname, $lastname, $username, $email, $contact, $password, $user_type);
     }
 }
 
+/* -------------------- forgot-password.php */
 if (isset($_POST["forgot_password"])) {
     $user_identifier = $_POST['user_identifier'];
-    $validate->validateLength($user_identifier, '', 'user_identifier_error', 'Required field');
+    $validate->validate_length($user_identifier, '', 'user_identifier_error', 'Required field');
     $table_identifier =  $validate->table_identifier($user_identifier, 'user_identifier_error');
-
     if (count($validate->output) > 0) {
         echo json_encode($validate->output);
     } else {
@@ -78,105 +61,76 @@ if (isset($_POST["forgot_password"])) {
     }
 }
 
+/* -------------------- new-password.php */
 if (isset($_POST["new_password"])) {
     $url_code = $_GET['code'];
     $password = $_POST['password'];
     $retype_password = $_POST['retype_password'];
-
-    $validate->validateLength($password, $retype_password, 'password_error', 'Required field' );
-    $validate->validateLength($password,$retype_password, 'retype_password_error', 'Required field' );
+    $validate->validate_length($password, $retype_password, 'password_error', 'Required field' );
+    $validate->validate_length($password,$retype_password, 'retype_password_error', 'Required field' );
     $user_id = $validate->get_user_id($url_code);
-
     if (count($validate->output) > 0) {
         echo json_encode($validate->output);
     } else {
-        $account->new_password($user_id, $password, $retype_password);
+        $account->new_password($user_id, $password);
     }
 }
 
-/* -------------------- update user profile */
+/* -------------------- profile.php */
+if (isset($_POST["fetch_information"])) {
+    $user_id = $_SESSION['user_id'];
+    $account->fetch_information($user_id); 
+}
 
 if (isset($_POST["update"])) {
-    $image = $_POST['crop_image'];
+    $user_id = $_SESSION['user_id'];
+    $type = $_POST['type'];
+if($type == 'email') {
+    $email = $_POST['email'];
+ /* checks if the email has been changed */
+    if( $_SESSION['current_email'] != $email){
+        $validate->validate_length($email,'', 'email_error', 'Required field' );
+    } 
+} else {
+
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $username = $_POST['username'];
-    $email = $_POST['email'];
     $contact = $_POST['contact'];
-    $region = $_POST['region'];
-    /* $province = $_POST['province'];
-    $municipality = $_POST['municipality'];
-    $barangay = $_POST['barangay'];
-    $street = $_POST['street'];
-    $user_id  = $_POST['user_id']; */
+    $image = $_POST['crop_image'];
 
-    $validate->validateLength($firstname,'','firstname_error', 'Required field' );
-    $validate->validateLength($lastname,'', 'lastname_error', 'Required field' );
-    $validate->validateLength($username, '', 'username_error', 'Required field' );
-    $validate->validateLength($email,'', 'email_error', 'Required field' );
-    $validate->validateLength($contact,'', 'contact_error', 'Required field' );
-    $validate->validateLength($password, $retype_password, 'password_error', 'Required field' );
-    $validate->validateLength($password,$retype_password, 'retype_password_error', 'Required field' );
-/*     $validate->validateSelectorLength($region,'region_error', 'Required field' );
-    $validate->validateSelectorLength($province,'province_error', 'Required field' );
-    $validate->validateSelectorLength($municipality,'municipality_error', 'Required field' );
-    $validate->validateSelectorLength($barangay,'barangay_error', 'Required field');
-    $validate->validateLength($street,'', 'street_error', 'Required field' ); */
+    /* checks if the username or contact number has been changed */
+if( $_SESSION['current_username'] != $username){
+    $validate->validate_length($username, '', 'username_error', 'Required field' );
+} 
 
+if( $_SESSION['current_contact'] != $contact){
+    $validate->validate_length($contact,'', 'contact_error', 'Required field' );
+} 
+    $validate->validate_length($firstname,'','firstname_error', 'Required field' );
+    $validate->validate_length($lastname,'', 'lastname_error', 'Required field' );
+}
+    
     if (count($validate->output) > 0) {
         echo json_encode($validate->output);
     } else {
-        $account->update($user_id,$firstname, $lastname, $username, $email, $contact, $image);
-      /*   $account->update($user_id,$firstname, $lastname, $username, $email, $contact, $region, $province, $municipality, $barangay, $street, $image); */
-    }
-}
-
-if (isset($_POST["fetch_account"])) {
-    $user_id = $_POST['user_id'];
-    $account->fetch_user($user_id);
-}
-
-if (isset($_POST["delete_account"])) {
-    $user_id = $_POST['user_id'];
-    $account->delete_account($user_id);
-}
-
-if (isset($_POST["change_password"])) {
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $retype_password = $_POST['retype_password'];
-   
-    $validate->validateLength($password, $password, 'password_error', 'Required field' );
-    $validate->validateLength($current_password, $password, 'current_password_error', 'Required field' );
-  
-    if (count($validate->output) > 0) {
-        echo json_encode($validate->output);
-    } else {
-        $account->change_password($user_id, $password, $retype_password);
-    }
-}
-
-if (isset($_POST["match_password"])) {
-    $user_id = $_POST['user_id'];
-    $current_password = $_POST['current_password'];
-    if (count($validate->output) > 0) {
-        echo json_encode($validate->output);
-    } else {
-        if ($validate->match_current_password($current_password, $user_id)){
-        } 
-    }
-}
-
-if (isset($_POST["password_requirment"])) {
-    $retype_password = $_POST['retype_password'];
-    $password = $_POST['password'];
-
-    $validate->validateLength($password, $password, 'password_error', 'Required field' );
-    $validate->validateLength($password,$retype_password, 'retype_password_error', 'Required field' );
-    if (count($validate->output) > 0) {
-        echo json_encode($validate->output);
-    } else {
-            $output['success'] = 'Success';
-            echo json_encode($output);
+        if($type == 'email') {
+            /* code to update email will not be invoked if its value has not been changed */
+            if( $_SESSION['current_email'] != $email){
+                $account->update($user_id, "", "", "", $email, "", "", $type);
+            } else {
+                $output['error'] = 'No changes have been made';
+                echo json_encode($output);
+            }
+        } else {
+            /*  code to update user information will not be invoked unless a change has been made */
+            if( $_SESSION['current_firstname'] != $firstname || $_SESSION['current_lastname'] != $lastname || $_SESSION['current_username'] != $username || $_SESSION['current_contact'] != $contact || $_SESSION['current_image'] != $image){
+            $account->update($user_id, $firstname, $lastname, $username, "", $contact, $image, $type);
+            } else {
+                $output['error'] = 'No changes have been made';
+                echo json_encode($output);
+            }
+        }
+      
     }
 }

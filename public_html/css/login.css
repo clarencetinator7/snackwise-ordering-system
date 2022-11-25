@@ -1,5 +1,13 @@
+:root {
+    --fontPoppins: 'Poppins', sans-serif;
+    --fontOutfit: 'Outfit', sans-serif;
+
+    --snackRed: #dd1c1a;
+    --wiseYellow: #f0c808;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--fontPoppins);
     background-image: url(../img/Background-Pattern.jpg);
 }
 
@@ -24,17 +32,17 @@ body {
 }
 
 .snackwise-label{
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--fontOutfit);
     font-weight: bold;
     font-size: 30px;
 }
 
 .brand-name .red {
-    color: #DD1C1A;
+    color: var(--snackRed);
 }
 
 .brand-name .yellow {
-    color: #F0C808;
+    color: var(--wiseYellow);
 }
 
 .form-container {
@@ -48,7 +56,7 @@ body {
 }
 
 .form-header h3 {
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--fontOutfit);
     font-weight: bold;
     font-size: 36px;
     color: #DD1C1A;
@@ -60,10 +68,12 @@ body {
 
 .col input {
     border: none;
-    background-color: #eeeeee;
+    border-radius: 10px;
+    background-color: #F2F1F9;
     height: 65px;
     margin: 1em 0;
     padding: 1em;
+    width: 100%;
 }
 
 .btn {
@@ -89,8 +99,8 @@ body {
 
 .toggler {
     position: absolute;
-    top: 40%;
-    right: 25px;
+    top: 40px;
+    right: 30px;
     color: #75758A;
     font-size: 1.2em;
     cursor: pointer;
@@ -111,4 +121,18 @@ body {
         justify-content: center;
         align-items: center;
     } 
+}
+
+/* hides ms-edge password toggler */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+.input_error {
+
+    position: relative;
+    top: -15px;
+    font-size: 14px;
+    color: red;
 }

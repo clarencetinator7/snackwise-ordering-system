@@ -75,7 +75,7 @@ $conn = $db->connect();
 
         </div>
 
-        <div class="cart_price_information  flex-column mx-3 mb-3" id="cart_summay">
+        <div class="cart_price_information  flex-column mx-3 mb-3" id="cart_summary">
             <hr class="w-100 my-2">
             <div class=" bold">SUBTOTAL:</div>
             <div class="text-end bolder" id="cart_total_price">164.00 ₱</div>
@@ -363,7 +363,7 @@ $conn = $db->connect();
                 <div class="modal-footer">
                     <button class="btn btn-success" type="button" name="add_to_order" id="add_to_order">Checkout</button>
                     <button class="btn btn-danger" type="button" id="cancel_add_to_order"
-                        onclick="new Cart().cancel_order();">Cancel</button>
+                        onclick="new Cart().close_add_order();">Cancel</button>
                 </div>
             </div>
         </div>
@@ -400,72 +400,29 @@ $conn = $db->connect();
             })
         }
 
-
         /* END OF DROPDOWN */
-
-        document.addEventListener("DOMContentLoaded", function(event) {
-
-            let cart = new Cart();
-            let menu = new Menu();
-
-
-
-            document.getElementById("cart_summay").style.display = "none";
-
-            //gets the value of selected radio button which is used to filter the items in the menu table
-            document.querySelectorAll('input[name="category"]')[0].checked = "checked";
-            document.querySelectorAll('input[name="category"]')[0].parentElement.parentElement.id =
-                "active-sort";
-            document.querySelectorAll('input[name="category"]').forEach((radio) => {
-                radio.addEventListener('change', function() {
-                    // removes styling of the unselected radio button
-                    document.querySelectorAll('input[name="category"]').forEach(function(
-                        radio) {
-                        radio.parentElement.parentElement.setAttribute("id", "");
-                    });
-                    (document.querySelector('input[name="category"]:checked').parentElement
-                        .parentElement).id = "active-sort";
-                    menu.display_menu(document.querySelector('input[name="category"]:checked')
-                        .value);
-                });
-                menu.display_menu(document.querySelector('input[name="category"]:checked').value);
-            });
-
-            /* document.querySelector(`input[type='checkbox'][value='65']`).checked=true; */
-            console.log(document.querySelector(`input[name="category"][value='57']`));
+            new Menu().menu();
             /* --------------------cart */
-
-            <?php if ($validate->is_logged_in("customer")) {
+            <?php if (!($validate->is_logged_in("customer"))) {
             ?>
-                document.getElementById('modal_backdrop').style.display = 'none';
-
-            <?php
-            } else {
-            ?>
-                cart.cart();
+               new Cart().cart();
             <?php
             } ?>
 
-
-        });
-
-    </script>
-
- <?php 
+    <?php 
     /* adds selected bestseller item to cart */
         if(isset($_GET['b'])) {
      ?>
-     <script>
         new Cart().add_to_cart(<?php echo $_GET['b']?>);
         /* removes the URL parameter after the item was added to the cart */
         let url= document.location.href;
-    window.history.pushState({}, "", url.split("?")[0]);
+        window.history.pushState({}, "", url.split("?")[0]);
     
-     </script>
-     <?php
+    <?php
         } 
         
         ?>
+        </script>
 </body>
 
 </html>

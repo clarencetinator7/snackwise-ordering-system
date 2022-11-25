@@ -51,25 +51,17 @@
             <form action="POST" id="account_form">
                 <span id="success_message" class="text-success"></span>
                 <span id="error_message" class="text-success"></span>
-                <input type="text" name="user_identifier" id="user_identifier" placeholder="Enter Email Address" value="" autocomplete="off">
-                <span id="user_identifier_error" class="text-danger"></span>
-                <button type ="button"  id="forgot_password">Submit</button>
+                <input type="text" name="user_identifier" id="user_identifier" placeholder="Username / Email Address / Contact Number" value="" autocomplete="off">
+                <span id="user_identifier_error" class="input_error"></span>
+                <button type ="button"  id="forgot_password" onclick=" new Account().forgot_password();">Submit</button>
             </form>
         </div>
     </div>
     <!-- BOOTSTRAP JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-
-
     <script src="../js/Account.js"></script>
-    <script>
-        let account = new Account();
-     
-        document.getElementById("forgot_password").onclick = function() {
-            account.forgot_password();
-        }
-    </script>
+    
 </body>
 
 </html>

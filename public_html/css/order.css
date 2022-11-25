@@ -1,0 +1,534 @@
+/* VAR */
+:root {
+    --snackred: #DD1C1A;
+    --wiseyellow: #F0C808;
+    --labelCol: #A3A3A3;
+    --valueCol: #595959;
+
+    --fontOutfit: 'Outfit', sans-serif;
+    --fontPoppins: 'Poppins', sans-serif;
+    
+}
+
+
+body {
+    font-size: 62.5%;
+    font-family: var(--fontPoppins);
+    background-image: url(../img/Background-Pattern.jpg);
+}
+
+/* START OF NAVBAR CSS */
+
+nav {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.red {
+    color: var(--snackred);
+}
+
+.yellow {
+    color: var(--wiseyellow);
+}
+
+#active {
+    color: var(--wiseyellow);
+}
+
+
+.nav-list li{
+    margin: 0 1em;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+
+
+a[name="sign-up-btn"] {
+    padding: .5em 2em;
+    background-color: transparent; 
+    border: none;
+    color: var(--snackred);
+    font-weight: bold;
+    border: solid 2px var(--snackred);
+    border-radius: 10px;
+    transition: .3s ease-in-out;
+}
+
+a[name="sign-up-btn"]:hover {
+    background-color: var(--snackred);
+    color: white;
+    border-color: var(--snackred);
+}
+
+a[name="log-in-btn"] {
+    color: var(--snackred);
+    font-weight: bold;
+    padding: .5em 2em;
+}
+
+/* USER DROPDOWN */
+
+.dropdown button {
+    background-color: transparent;
+    color: #878787;
+    border: none;
+    font-size: 2em;
+    transition: ease-in-out .5s;
+}
+
+.user-dropdown-container {
+    position: relative;
+}
+
+.user-dropdown-container .user-button {
+    background-color: transparent;
+    color: #878787;
+    border: none;
+    font-size: 2.3em;
+}
+
+.user-dropdown-container .drop-menu {
+    display: none;
+    position: absolute;
+    font-size: 2em;
+    background-color: white;
+    border: #d3d3d3 solid 1px;
+    border-radius: 5px;
+    width: 8em;
+    list-style: none;
+    padding: 1em .5em;
+    z-index: 10;
+}
+
+.drop-menu li {
+    margin: .3em 0;
+}
+
+.drop-menu li a {
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    color: #878787;
+    transform: .5s;
+}
+
+.drop-menu li a:hover {
+    color: #383838;
+}
+
+@media (min-width: 768px) {
+   
+    .user-dropdown-container .drop-menu {
+        /* CENTER */
+        top: 2.5em;
+        left: 50%;
+        transform: translateX(-50%);
+    }    
+    
+}
+
+/* END OF USER DROPDOWN CSS */
+
+
+.order-container {
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 2em;
+    height: calc(100vh - 71px);
+    display: flex;
+    flex-flow: column;
+}
+
+.order-header {
+    flex: 0 1 auto;
+}
+
+.order-header h1 {
+    font-family: var(--fontOutfit);
+    font-weight: bold;
+    font-size: 2.0rem;
+    color: var(--snackred);
+    margin-bottom: 1em;
+}
+
+.order-sort-container {
+    flex: 0 1 auto;
+    border-bottom: solid 1px #d4d4d4;
+    margin-bottom: 1em;
+}
+
+.sort-list {
+    padding: 0;
+    margin: 0; 
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    list-style: none;
+}
+
+.sort-list .sort-item {
+    margin-right: 2em;
+}
+
+.sort-list .sort-item label {
+    font-size: 1.6em;
+    font-family: var(--fontPoppins);
+    font-weight: bold;
+    color: var(--valueCol);
+    white-space: nowrap;
+    width: fit-content;
+    padding: 1em 0;
+    border-top: 2px solid transparent;
+    transition: all .2s ease-in-out;
+}
+
+.sort-list .sort-item input {
+    display: none;
+}
+
+.sort-list .sort-item input:checked + label {
+    color: var(--wiseyellow);
+    border-top: 2px var(--wiseyellow) solid;
+}
+
+.sort-list .sort-item label:hover {
+    color: var(--wiseyellow);
+    border-top: 2px var(--wiseyellow) solid;
+}
+
+
+.order-list {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.order-list .order-item {
+    background-color: #f7f7f7;
+    padding: 1em;
+    border-radius: 8px;
+    margin: .5em 0;
+}
+
+.order-list .order-item:nth-child(even) {
+    background-color: #efefef;
+
+}
+
+
+.order-item .order-details-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--fontPoppins);
+    margin-bottom: .3em
+;
+}
+
+.order-no-container span {
+    font-family: var(--fontOutfit);
+    color: var(--wiseyellow);
+    font-size: 2.0em;
+    font-weight: bold;
+}
+
+.tracking-container, .order-date-container, .quantity-container, .amount-container {
+    font-size: 1.6em;
+    color: var(--labelCol);
+}
+
+.tracking-number, .quantity, .total-amt {
+    color: var(--valueCol);
+    font-weight: bold;
+}
+
+.details-btn-container .details-btn {
+    font-size: 1.7em;
+    /* font-weight: bold; */
+    color: var(--labelCol);
+    border: solid 1px var(--labelCol);
+    border-radius: 5px;
+    padding: .3em 1em;
+    transition: all .2s ease;
+}
+
+.details-btn-container .details-btn:hover {
+    color: var(--wiseyellow);
+    border: solid 1px var(--wiseyellow);
+}
+
+.status-container span{
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+/* COLORS FOR DIFFERENT PENDING TYPES */
+
+.pending-stat {
+    color: #737373;
+}
+
+.preparing-stat {
+    color: #FFD600;
+}
+
+.pickup-stat {
+    color: #21A67A;
+}
+
+.complete-stat {
+    color: #110EC1;
+}
+
+.cancelled-stat {
+    color: #FF0300;
+}
+
+/* END OF COLORS FOR DIFFERENT PENDING TYPES */
+
+/* START OF ORDER DETAILS MODAL */
+
+.details-modal {
+    /* display: none; */
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.content-container {
+    background-color: white;
+    margin: 15% auto;
+    width: min(95%, 500px);
+    border-radius: 10px;
+    border: solid 1px var(--valueCol);
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1.5em 2em;
+}
+
+.closing-bar .close-btn {
+    float: right;
+    border-style: none;
+    background-color: transparent;
+    color: var(--labelCol);
+    font-size: 2em;
+    transition: all .2s ease;
+}
+
+.closing-bar .close-btn:hover {
+    color: var(--valueCol);
+}
+
+.mod-top {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px var(--labelCol);
+    padding-bottom: .5em;
+}
+
+
+.with-details .order-number-label, .with-details .order-number {
+    font-size: 2.0em;
+    font-weight: bold;
+    color: var(--wiseyellow);
+}
+
+.with-details .order-number {
+    margin-left: .3em;
+}
+
+.mod-top .with-details .label {
+    font-size: 1.6em;
+}
+
+.mod-top .with-details .value {
+    font-size: 1.7em;
+    color: var(--valueCol);
+    font-weight: bold;
+    margin-left: .3em;
+}
+
+.status-value {
+    font-size: 1.7em;
+    font-weight: bold;
+    margin-left: .3em;
+}
+
+.items-list {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    margin: 1em 0;
+}
+
+.items-list .item {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 1em;
+    border-radius: 5px;
+    margin: .5em 0;
+}
+
+.items-list .item:nth-child(even){
+    background-color: #efefef;
+}
+
+.item .item-img-container {
+    flex: 0 1 min(20%, 100px);
+    margin-right: 1em;
+}
+
+.item .item-img-container img {
+    max-width: 100%;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+.item .item-details {
+    flex: 1 1 auto;
+    font-size: 1.6em;
+    font-weight: bold;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.item-price-con .item-price {
+    color: var(--wiseyellow);
+}
+
+
+.mod-footer {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: solid 1px var(--labelCol);
+    padding-top: .5em;
+}
+
+.mod-footer .footer-col {
+    font-family: var(--fontOutfit);
+    font-weight: bold;
+    font-size: 1.8em;
+    color: var(--wiseyellow);
+}
+
+.cancel-bar {
+    margin-top: 2em;
+}
+
+.cancel-bar .cancel-btn {
+    float: right;
+}
+
+
+
+/* END OF ORDER DETAILS MODAL */
+
+.no-orders-container {
+    /* 
+        This should be 'display: flex;' if naka appear.
+    */
+    display: flex; 
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 2em;
+}
+
+.no-orders-container .no-order-message {
+    font-size: 2.5em;
+    font-family: var(--fontOutfit);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1em;
+    color: var(--labelCol);
+}
+
+.no-orders-container a {
+    font-family: var(--fontPoppins);
+    font-size: 2.0em;
+    color: var(--snackred);
+    text-decoration: none;
+    padding: .5em 1em;
+    border: solid 1px var(--snackred);
+    border-radius: 10px; 
+    transition: all .3s ease;
+}
+
+.no-orders-container a:hover {
+    background-color: var(--snackred);
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .order-container {
+        width: 70%;
+        margin: 5em auto;
+        padding: 5em;
+        border-radius: 10px;
+    }
+    .order-list {
+        padding: 0 .5em;
+    }
+
+    .order-item {
+        padding: 2em 3em !important;
+    }
+
+    .tracking-number,
+    .quantity,
+    .total-amt {
+        color: var(--valueCol);
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-left: .3em;
+    }
+
+    /* width */
+    .order-list::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    .order-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    .order-list::-webkit-scrollbar-thumb {
+        background: rgb(180, 180, 180);
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    .order-list::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .content-container {
+        margin: 10em auto !important;
+    }
+
+}

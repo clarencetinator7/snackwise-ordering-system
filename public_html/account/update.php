@@ -1,12 +1,18 @@
 <?php
-/* this page is used to verify the account of a user */
+/* this page is used to change email address */
 require_once dirname(__FILE__) . "/../php/classes/Account.php";
 require_once dirname(__FILE__) . "/../php/classes/Validate.php";
 
-$account = new Account();
 $validate = new Validate();
+
+$account = new Account();
+$user_id = $_GET['u'];
+$email = $_GET['email'];
 
 /* checks if the verification code in the URL parameter is in the database */
 if ($validate->validate_code()) {
-    $account->activate();
+    $account->update($user_id, "", "", "", $email, "", "", "new_email");
+    header('Location: ../profile.php');
 }
+
+

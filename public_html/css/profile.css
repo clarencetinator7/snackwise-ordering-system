@@ -1,0 +1,310 @@
+/* VAR */
+:root {
+    --snackred: #DD1C1A;
+    --wiseyellow: #F0C808;
+    --labelCol: #A3A3A3;
+    --valueCol: #595959;
+
+    --fontOutfit: 'Outfit', sans-serif;
+    --fontPoppins: 'Poppins', sans-serif;
+    
+}
+
+body {
+    font-size: 62.5%;
+    font-family: var(--fontPoppins);
+    background-image: url(../img/Background-Pattern.jpg);
+}
+
+/* START OF NAVBAR CSS */
+
+nav {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.red {
+    color: var(--snackred);
+}
+
+.yellow {
+    color: var(--wiseyellow);
+}
+
+#active {
+    color: var(--wiseyellow);
+}
+
+
+.nav-list li{
+    margin: 0 1em;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+
+
+a[name="sign-up-btn"] {
+    padding: .5em 2em;
+    background-color: transparent; 
+    border: none;
+    color: var(--snackred);
+    font-weight: bold;
+    border: solid 2px var(--snackred);
+    border-radius: 10px;
+    transition: .3s ease-in-out;
+}
+
+a[name="sign-up-btn"]:hover {
+    background-color: var(--snackred);
+    color: white;
+    border-color: var(--snackred);
+}
+
+a[name="log-in-btn"] {
+    color: var(--snackred);
+    font-weight: bold;
+    padding: .5em 2em;
+}
+
+/* USER DROPDOWN */
+
+.dropdown button {
+    background-color: transparent;
+    color: #878787;
+    border: none;
+    font-size: 2em;
+    transition: ease-in-out .5s;
+}
+
+.user-dropdown-container {
+    position: relative;
+}
+
+.user-dropdown-container .user-button {
+    background-color: transparent;
+    color: #878787;
+    border: none;
+    font-size: 2.3em;
+}
+
+.user-dropdown-container .drop-menu {
+    display: none;
+    position: absolute;
+    font-size: 2em;
+    background-color: white;
+    border: #d3d3d3 solid 1px;
+    border-radius: 5px;
+    width: 8em;
+    list-style: none;
+    padding: 1em .5em;
+    z-index: 10;
+}
+
+.drop-menu li {
+    margin: .3em 0;
+}
+
+.drop-menu li a {
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    color: #878787;
+    transform: .5s;
+}
+
+.drop-menu li a:hover {
+    color: #383838;
+}
+
+@media (min-width: 768px) {
+   
+    .user-dropdown-container .drop-menu {
+        /* CENTER */
+        top: 2.5em;
+        left: 50%;
+        transform: translateX(-50%);
+    }    
+    
+}
+
+/* END OF USER DROPDOWN CSS */
+
+
+/* START OF EDIT PROFILE CSS*/
+
+.profile-container {
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 2em 1em;
+    display: flex;
+    flex-flow: column; 
+}
+
+.flex-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+} 
+
+.parent-container h1{
+    font-family: var(--fontOutfit);
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 1em;
+    position: relative;
+    color: var(--snackred);
+}
+
+hr {
+    height: 5px;
+    background-color: gray;
+}
+
+.user-avatar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+} 
+
+.avatar{
+    width:300px;
+    border-radius: 15px;
+    margin: 0 auto;
+    border: none;
+}	
+
+.form-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: var(--snackred);
+}
+
+label{
+
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--wiseyellow); 
+}
+
+.col input {
+    border: none;
+    border-radius: 10px;
+    background-color:#F2F1F9;
+    height: 65px;
+    margin: .25em 0;
+    margin-bottom:20px;
+    padding: 1em;
+}
+
+.personal-info .btn {
+    border-radius: 10px;
+    font-size: 18px;
+    padding: .8em 0; 
+    margin: 1em 0; 
+    max-width: 18em;
+}
+
+.edit-btn {
+    background-color: var(--snackred);
+    color: white;
+}
+
+.update-btn {
+    background-color: var(--snackred);
+    color: white;
+}
+
+/* end edit profile form*/
+
+@media (min-width: 768px) {
+    .profile-container {
+        width: 70%;
+        margin: 5em auto;
+        padding: 5em;
+        border-radius: 10px;
+    }
+
+}
+
+
+.image_modal {
+    height: 300px;
+    width: 300px;
+    position: relative;
+    margin: 0 20px;
+
+}
+
+.display_image_modal {
+
+
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 500px;
+    z-index: 9;
+
+
+}
+
+.display_image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: #F2F1F9 3px solid;
+    border-radius: 500px;
+
+}
+
+.image_container input[type="file"] {
+
+    display: none;
+
+}
+
+.choose_image {
+    height: 50px;
+    width: 50px;
+    border-radius: 999px;
+    position: absolute;
+    bottom: 0;
+    right: 45px;
+    background-color: #DD1C1A;
+    color: white;
+    border: none;
+    font-size: 20px;
+    z-index: 999;
+}
+
+.lg-backdrop {
+    opacity: 0.8 !important;
+}
+
+.input_error {
+
+    position: relative;
+    top: -15px;
+    font-size: 14px;
+    color: red;
+}
+
+
+
+
+
+
+
+

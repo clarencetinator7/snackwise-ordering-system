@@ -11,8 +11,6 @@ $db = new DbConnection();
 $conn = $db->connect();
 $menu = new Menu();
 
-
-
 ?>
 
 <!doctype html>
@@ -92,7 +90,7 @@ $menu = new Menu();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php echo $menu->fetch_top_five_data(); ?>
+                        <?php echo $menu->fetch_five(); ?>
                     </tbody>
                 </table>
 
@@ -110,7 +108,7 @@ $menu = new Menu();
                     <div class="modal-header ">
 
                         <div class="modal-title h6 fw-bold" id="modal_title">Add</div>
-                            <!--  <button type="button" class="btn " id="close_menu" ><i class="fa-solid fa-xmark"></i></button> -->
+                             <div  style="color:#A3A3A3; " id="close_menu" ><i class="fa-solid fa-xmark"></i></div>
                     </div>
 
 
@@ -172,7 +170,7 @@ $menu = new Menu();
                             <label class="form-label" for="availability">Availability</label>
                             <select class="form-select" name="availability" id="availability">
                             <option value="none" style="display: none; opacity:0;">Select</option>
-                                <option value="Available">Available</option>
+                                <option value="Available" selected>Available</option>
                                 <option value="Unavailable">Unavailable</option>
                             </select>
                             <span class="" id="availability_error"></span>
@@ -202,7 +200,7 @@ $menu = new Menu();
 
                     <div class="modal-footer">
                     <input type="hidden" name="action_menu" id="action_menu" value="Add" />
-                         <button type="button" class="btn btn-danger w-25" id="close_menu">Close</i></button>
+                     <!--     <button type="button" class="btn btn-danger w-25" id="close_menu">Close</i></button> -->
                         
                         <button type="button" class="btn btn-success btn-add w-25" id="action_menu_button" value="Add">Add</button>
                        

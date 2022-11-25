@@ -1,4 +1,3 @@
-
 <?php session_start(); ?>
 
 
@@ -18,7 +17,7 @@
     <!-- FONT LINKS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Poppins:ital,wght@0,300;0,600;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
     <!-- BOOTSTRAP CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -66,17 +65,17 @@
                     <div class="row">
                         <div class="col">
                             <!-- <label for="user_identifier">Username / Email Address / Phone Number</label> -->
-                            <input type="text" class="form-control username-input" name="user_identifier" id="user_identifier" placeholder="Username / Email Address / Phone Number" value="" autocomplete="off">
-                            <span class="" id="user_identifier_error"></span>
+                            <input type="text" class="username-input" name="user_identifier" id="user_identifier" placeholder="Username / Email Address / Contact Number" value="" autocomplete="off">
+                            <span class="input_error" id="user_identifier_error"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col password-container">
                             <!-- <label for="password">Password</label> -->
-                            <input type="password" class="form-control password-input" name="password" id="password" placeholder="Password" value="" onkeydown="/* verifyPassword(this.value) */" autocomplete="off">
+                            <input type="password" class="password-input" name="password" id="password" placeholder="Password" value="" onkeydown="/* verifyPassword(this.value) */" autocomplete="off">
                             <i class="fa-solid fa-eye-slash toggler" id="password_toggler" for="password" onclick="new Account().toggle_password(this.id, this.getAttribute('for'))"></i>
 
-                            <span class="" id="password_error"></span>
+                            <span class="input_error" id="password_error"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -89,7 +88,7 @@
                 <section class="button-container">
                     <div class="row">
                         <div class="d-grid gap-2">
-                            <button type="button" id="login" class="btn signin-btn"> Sign In</button>
+                            <button type="button" id="login" class="btn signin-btn" onclick="new Account().login()"> Sign In</button>
                         </div>
                     </div>
                     <div class="row">
@@ -119,20 +118,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
-
-
-   <script>
-    
-let account = new Account();
-
-
-
-    document.getElementById("login").onclick = function () {
-         
-            account.login();
-        }
-
-</script>
 
 </body>
 

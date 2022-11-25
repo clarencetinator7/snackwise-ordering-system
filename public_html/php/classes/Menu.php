@@ -5,10 +5,35 @@ require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 
 class Menu extends DbConnection
 {
-	public $output = array();
-	
+	/* -------------------- index.php  */
+	public function display_bestseller()
+	{
+		/* gets top 5 available bestseller items */
+		$result = $query = $this->connect()->prepare("SELECT o.menu_id, COUNT(o.menu_id), m.* FROM orderlist o INNER JOIN menu  m ON (m.menu_id = o.menu_id) WHERE m.availability=:availability GROUP BY o.menu_id ORDER BY COUNT(o.menu_id) DESC LIMIT 4");
+		$query->execute([":availability"=>'Available']);
+		if ($result->rowCount() > 0) {
+			$data = array();
+			foreach ($result as $row) {
+				$sub_array = array();
+				$sub_array['menu_id'] = $row['menu_id'];
+				$sub_array['name'] = $row['name'];
+				$sub_array['description'] = $row['description'];
+				$sub_array['discount'] = $row['discount'];
+				$sub_array['category'] = $row['category'];
+				$sub_array['price'] = $row['price'];
+				$sub_array['image'] = $row['image'];
+				$sub_array['discounted_price'] = ($row['price'] - ($row['price'] * (floatval($row['discount']) / 100)));
+				
+				$data[] = $sub_array;
+			}
+			$output = array("data" => $data);
+		} else {
+			$output['empty'] = "No Items Found";
+		}
+		echo json_encode($output);
+	}
 
-	/* --------------------  */
+	/* -------------------- menu.php */
 	public function display_menu($category)
 	{
 		/* gets all available items */
@@ -37,35 +62,8 @@ class Menu extends DbConnection
 		echo json_encode($output);
 	}
 
-/* --------------------  */
-	public function display_bestseller()
-	{
-		/* gets top 5 available bestseller items */
-		$result = $query = $this->connect()->prepare("SELECT o.menu_id, COUNT(o.menu_id), m.* FROM orderlist o INNER JOIN menu  m ON (m.menu_id = o.menu_id) WHERE m.availability=:availability GROUP BY o.menu_id ORDER BY COUNT(o.menu_id) DESC LIMIT 4");
-		$query->execute([":availability"=>'Available']);
-		if ($result->rowCount() > 0) {
-			$data = array();
-			foreach ($result as $row) {
-				$sub_array = array();
-				$sub_array['menu_id'] = $row['menu_id'];
-				$sub_array['name'] = $row['name'];
-				$sub_array['description'] = $row['description'];
-				$sub_array['discount'] = $row['discount'];
-				$sub_array['category'] = $row['category'];
-				$sub_array['price'] = $row['price'];
-				$sub_array['image'] = $row['image'];
-				$sub_array['discounted_price'] = ($row['price'] - ($row['price'] * (floatval($row['discount']) / 100)));
-				
-				$data[] = $sub_array;
-			}
-			$output = array("data" => $data);
-		} else {
-			$output['empty'] = "No Items Found";
-		}
-		echo json_encode($output);
-	}
-
-	/* -------------------- admin  */
+	/* -------------------- STAFF -------------------- */
+	/* -------------------- edit-menu.php */
 	public function add_menu($menu_id, $name, $description, $category, $discount, $price, $date, $availability, $image)
 	{
 		$upload_image = new Image();
@@ -144,14 +142,11 @@ class Menu extends DbConnection
 	}
 
 	/* fetch the 5 recently added menus, this will be the default items to be shown in the table */
-	public function fetch_top_five_data()
+	public function fetch_five()
 	{
-	
-		$result = $query = $this->connect()->prepare("SELECT m.*,m.name AS menu_name, c.category_id, c.name AS cat_name FROM category c INNER JOIN menu m ON(c.category_id = m.category) ORDER BY date ASC LIMIT 5");
-		
+		$result = $query = $this->connect()->prepare("SELECT m.*,m.name AS menu_name, c.category_id, c.name AS cat_name FROM category c INNER JOIN menu m ON(c.category_id = m.category) ORDER BY m.menu_id ASC LIMIT 5");
 		$query->execute();
 		$output = '';
-
 		foreach ($result as $row) {
 			$output .= '
 		<tr>
@@ -164,8 +159,10 @@ class Menu extends DbConnection
 			<td>' . $row["date"] . '</td>
 			<td>' . $row["availability"] . '</td>
 			<td> <img src= "https://res.cloudinary.com/dhzn9musm/image/upload/' . $row["image"] . '" width="70px" height="70px"></td>
-			<td><button type="button" onclick="new Menu().fetch_selected_menu(' . $row["menu_id"] . ')" class="btn btn-edit"><i class="fa-solid fa-pen"></i></button>&nbsp;
-			<button type="button" class="btn btn-delete" onclick="new Menu().delete_menu(' . $row["menu_id"] . ')"><i class="fa-solid fa-trash"></i></button></td>
+			<td>
+				<button type="button" onclick="new Menu().fetch_selected_menu(' . $row["menu_id"] . ')" class="btn btn-edit"><i class="fa-solid fa-pen"></i></button>&nbsp;
+				<button type="button" class="btn btn-delete" onclick="new Menu().delete_menu(' . $row["menu_id"] . ')"><i class="fa-solid fa-trash"></i></button>
+			</td>
 		</tr>
 		';
 		}
@@ -187,31 +184,27 @@ class Menu extends DbConnection
 		$start = $startGET ? intval($startGET) : 0;
 		$lengthGET = filter_input(INPUT_GET, "length", FILTER_SANITIZE_NUMBER_INT);
 		$length = $lengthGET ? intval($lengthGET) : 10;
-		$searchQuery = filter_input(INPUT_GET, "searchQuery", FILTER_SANITIZE_STRING);
+		$searchQuery = filter_input(INPUT_GET, "searchQuery", FILTER_UNSAFE_RAW);
 		$search = empty($searchQuery) || $searchQuery === "null" ? "" : $searchQuery;
 		$sortColumnIndex = filter_input(INPUT_GET, "sortColumn", FILTER_SANITIZE_NUMBER_INT);
-		$sortDirection = filter_input(INPUT_GET, "sortDirection", FILTER_SANITIZE_STRING);
+		$sortDirection = filter_input(INPUT_GET, "sortDirection", FILTER_UNSAFE_RAW);
 
-		$column = array("menu_id", "menu_name", "description", "category", "price", "date", "availability", "image");
+		/* order by */
+		$column = array("menu_id", "menu_name", "description", "category", "price", "date", "availability", "menu_id");
 		$sql = "SELECT m.*,m.name AS menu_name, c.category_id, c.name AS cat_name FROM category c INNER JOIN menu m ON(c.category_id = m.category) ";
 		
+		$search =  substr($search , 1);
 		$sql .= '
 			WHERE m.menu_id LIKE "%' . $search . '%"
 			OR m.name LIKE "%' . $search . '%"
-			OR m.description LIKE "%' . $search . '%"
-			OR c.name LIKE "%' . $search . '%"
-			OR m.discount LIKE "%' . $search . '%"
-			OR m.price LIKE "%' . $search . '%"
 			OR m.date LIKE "%' . $search . '%"
-			OR m.availability LIKE "%' . $search . '%"
-			OR m.image LIKE "%' . $search . '%"
 		';
 
 		/* pagination */
 		if ($sortColumnIndex != '') {
 			$sql .= 'ORDER BY ' . $column[$sortColumnIndex] . ' ' . $sortDirection . ' ';
 		} else {
-			$sql .= 'ORDER BY date ASC ';
+			$sql .= 'ORDER BY m.menu_id ASC ';
 		}
 
 		$sql1 = '';

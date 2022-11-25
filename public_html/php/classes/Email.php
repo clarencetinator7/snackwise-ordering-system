@@ -18,8 +18,7 @@
             );
 
             if($type == "contact") {
-                $email = "snackwise.hagonoy@gmail.com";
-                $mail->addAddress($email);
+                $mail->addAddress("snackwise.hagonoy@gmail.com");
                 $mail->addReplyTo($email);
                 $mail->setFrom($name);
       
