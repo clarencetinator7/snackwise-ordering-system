@@ -36,6 +36,7 @@ component that allows the business to manage orders and update the menu.
 - [PHP QR code (Qrcode maker)](https://phpqrcode.sourceforge.net/)
 - [MPDF](https://github.com/mpdf/mpdf/)
 - [Cloudinary](https://github.com/cloudinary/cloudinary_php/)
+- [CropperJS](https://github.com/fengyuanchen/cropperjs/)
 - [PHPMailer](https://github.com/PHPMailer/PHPMailer/)
 - [JSTable](https://github.com/jstable/JSTable)
 - [Animate on Scroll](https://github.com/michalsnik/aos)
